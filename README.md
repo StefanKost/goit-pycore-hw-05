@@ -22,3 +22,8 @@ python loglib/main.py ./data/logs.log
 python loglib/main.py ./data/logs.log INFO
 python loglib/main.py ./data/logs.log ERROR
 ```
+
+### Task 4: Assistant Bot
+```bash
+python contacts_bot
+```
