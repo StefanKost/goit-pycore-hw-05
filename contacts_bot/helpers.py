@@ -47,3 +47,19 @@ def parse_contact_args(args: List[str], required_count: int, operation: str) -> 
         return username, normalize_phone(phone)
 
     return tuple(arg.strip() for arg in args[:required_count])
+
+
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except KeyError as e:
+            return f"Contact not found: {e}"
+        except ValueError as e:
+            return f"Error: {e}"
+        except IndexError as e:
+            return f"Error: {e}"
+        except Exception as e:
+            return f"An error occurred: {type(e).__name__}: {e}"
+
+    return inner

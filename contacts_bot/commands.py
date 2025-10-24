@@ -1,12 +1,11 @@
 from typing import Dict, List, Callable
 import helpers
+from helpers import input_error
 
 
+@input_error
 def add_contact(args: List[str], contacts: Dict[str, str]) -> str:
-    try:
-        username, phone = helpers.parse_contact_args(args, 2, "Add command")
-    except ValueError as e:
-        return str(e)
+    username, phone = helpers.parse_contact_args(args, 2, "Add command")
 
     if username in contacts:
         return f"Contact '{username}' already exists. Use 'change' command to update."
@@ -15,11 +14,9 @@ def add_contact(args: List[str], contacts: Dict[str, str]) -> str:
     return "Contact added."
 
 
+@input_error
 def change_contact(args: List[str], contacts: Dict[str, str]) -> str:
-    try:
-        username, phone = helpers.parse_contact_args(args, 2, "Change command")
-    except ValueError as e:
-        return str(e)
+    username, phone = helpers.parse_contact_args(args, 2, "Change command")
 
     if username not in contacts:
         return f"Contact '{username}' not found."
@@ -28,11 +25,9 @@ def change_contact(args: List[str], contacts: Dict[str, str]) -> str:
     return "Contact updated."
 
 
+@input_error
 def show_phone(args: List[str], contacts: Dict[str, str]) -> str:
-    try:
-        username = helpers.parse_contact_args(args, 1, "Phone command")
-    except ValueError as e:
-        return str(e)
+    username = helpers.parse_contact_args(args, 1, "Phone command")
 
     if username not in contacts:
         return f"Contact '{username}' not found."
@@ -40,6 +35,7 @@ def show_phone(args: List[str], contacts: Dict[str, str]) -> str:
     return f"Phone: {contacts[username]}"
 
 
+@input_error
 def show_all(contacts: Dict[str, str]) -> str:
     if not contacts:
         return "No contacts found."
